@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class test {
+ class test {
 	//使用List管理玩家的角色，在添加随从和随从死亡后从场上移除，将会起到非常方便的作用。
 	public static List<role> p1 = new ArrayList<>();//先手玩家
 	public static List<role> p2 = new ArrayList<>();//后手玩家

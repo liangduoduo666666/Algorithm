@@ -1,5 +1,11 @@
 package mysearch;
 
+import java.util.Arrays;
+
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
 /**
  * 数组必须是有序的
  * 二分查找(递归实现)
@@ -52,9 +58,18 @@ public class BinarySearch {
 		return -1;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
-		int[] a  = {1,2,3,4,5,6,7,8};
+		/*int[] a  = {1,2,3,4,5,6,7,8};
 		int result = rank(10,a);
-		System.out.println(result);
+		System.out.println(result);*/
+		
+		int[] whitelist =  In.readInts(args[0]);
+		Arrays.sort(whitelist);
+		while(!StdIn.isEmpty()){
+			int key = StdIn.readInt();
+			if(rank(key,whitelist)<0)
+				StdOut.println(key);
+		}
 	}
 }
