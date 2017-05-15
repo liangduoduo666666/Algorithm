@@ -1,4 +1,4 @@
-package niuke;
+package niuke_sort;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -13,7 +13,7 @@ import java.util.LinkedList;
  *
  */
 
-class test_1_2 {
+class TreePrinter {
     private TreeNode root;  
     
     class TreeNode {
@@ -133,7 +133,7 @@ class test_1_2 {
     
     public static void main(String[] args) {
         int[] a = {2,4,12,45,21,6,111};  
-        test_1_2 bTree = new test_1_2();  
+        TreePrinter bTree = new TreePrinter();  
         for (int i = 0; i < a.length; i++) {  
             bTree.buildTree(bTree.root, a[i]);  
         }
