@@ -1,6 +1,6 @@
 package offer;
 
-public class test18 {
+class test18 {
     public static boolean HasSubtree(TreeNode A,TreeNode B) {
     	boolean result = false;
     	if(A!=null && B!=null){
