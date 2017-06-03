@@ -1,56 +1,67 @@
 package offer;
 
-import java.util.ArrayList;
-
+/**
+ * 数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
+ * 例如输入一个长度为9的数组{1,2,3,2,2,2,5,4,2}。
+ * 由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。
+ * 如果不存在则输出0。
+ * @author zhouliang
+ *
+ */
 class test29 {
-
-	public static void main(String[] args) {
-    	int[] nums = {4,5,1,6,2,7,2,8};
-    	test29 t  =  new test29();
-    	ArrayList<Integer> result = t.GetLeastNumbers_Solution(nums, 2);
-    	for(int i=0; i<result.size(); i++){
-    		System.out.print(result.get(i)+" ");
+    public int MoreThanHalfNum_Solution(int [] array) {
+    	if(array.length<=0 || array==null){
+    		return 0;
     	}
-	}
-	
-    public ArrayList<Integer> GetLeastNumbers_Solution(int [] input, int k) {
-    	ArrayList<Integer> result = new ArrayList<Integer>();
-    	
-    	for(int i=k/2-1; i>=0; i--){
-    		heapAdjust(input, i, k);
-    	}
-    	
-    	for(int j=k; j<input.length; j++){
-    		if(input[0] > input[j]){
-    			swap(input, 0, j);
-    			heapAdjust(input, 0, k);
+    	int mid = array.length >> 1;
+    	int start = 0;
+    	int end = array.length-1;
+    	int index = partition(array, start, end);
+    	while(index!=mid){
+    		if(index>mid){
+    			end = index-1;
+    			index = partition(array,start,end);
+    		}else{
+    			start = index+1;
+    			index = partition(array,start,end);
     		}
     	}
     	
-    	for(int x=0; x<k; x++){
-    		result.add(input[x]);
-    	}
-        return result;
-    }
-
-    public  void heapAdjust(int[] array, int index, int length){
-    	int temp = array[index];
-    	for(int j=2*index+1; j<length; j=2*j+1){
-    		if(j<length-1 && array[j]<array[j+1]){
-    			j++;
+    	int result = array[mid];
+    	int times = 0;
+    	for(int i=0; i<array.length ;i++){
+    		if(array[i]==result){
+    			times++;
     		}
-    		if(temp > array[j]){
-    			break;
-    		}
-    		array[index] = array[j];
-    		index = j;
     	}
-    	array[index] = temp;
+    	if(times*2>array.length){
+    		return result;
+    	}else{
+    		return 0;
+    	}
     }
     
-     void  swap(int[] A,int m,int n){
-        int temp = A[m];
-        A[m] = A[n];
-        A[n] = temp;
+    public int partition(int[] array, int start ,int end){
+    	int mid = array[start];
+    	while(start<end){
+    		while(start<end && array[end]>=mid){
+    			end--;
+    		}
+    		array[start] = array[end];
+    		
+    		while(start<end && array[start]<=mid){
+    			start++;
+    		}
+    		array[end] = array[start];
+    	}
+    	array[start] = mid;
+    	return start;
     }
+    
+    public static void main(String[] args) {
+    	test29 t= new test29();
+    	int[] array = {1,2,3,2,4,2,5,2,3};
+    	int result = t.MoreThanHalfNum_Solution(array);
+    	System.out.println(result);
+	}
 }
